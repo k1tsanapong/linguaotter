@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "470678956300",
+    "project_id": "linguaotter",
+    "storage_bucket": "linguaotter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470678956300:android:93d6024bffd0645914c129",
+        "android_client_info": {
+          "package_name": "com.linguaotter.cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470678956300-tm8ldno30fu5fk36lu47h3bhjh0e52q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linguaotter.cards",
+            "certificate_hash": "2bf15af0b011b3c78265a01d25c93288d5b332c2"
+          }
+        },
+        {
+          "client_id": "470678956300-mv5s9octun8ghns5bc6d7r8uet7scojr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcs-l8H2WuGGon6PWYqv25DWUEKczWuwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470678956300-a530qd88kscvepddc5pv92b3eiidlbpu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
