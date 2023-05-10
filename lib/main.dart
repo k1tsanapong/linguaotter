@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:linguaotter/pages/competition/hard_mode.dart';
 import 'package:linguaotter/pages/congrats.dart';
 import 'package:linguaotter/pages/competition/easy_mode.dart';
+import 'package:linguaotter/pages/edit_profile.dart';
 import 'package:linguaotter/pages/home_screen.dart';
 import 'package:linguaotter/pages/competition/medium_mode.dart';
 import 'package:linguaotter/pages/competition/select_difficulty.dart';
@@ -56,6 +57,7 @@ Future main() async {
           '/practice-mode': (ctx) => PracticeMode(),
           '/learning-mode': (ctx) => LearningMode(),
           '/score-board': (ctx) => ScoreBoard(),
+          '/edit-profile': (ctx) => EditProfile(),
 
         },
       ),

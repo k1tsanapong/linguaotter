@@ -124,3 +124,51 @@ class BackToTheFuture extends StatelessWidget {
     );
   }
 }
+
+class LongMenuButton extends StatelessWidget {
+
+  final String titleName;
+  final IconData iconName;
+  final Function()? run;
+
+  const LongMenuButton({Key? key, required this.titleName, required this.iconName, this.run}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            if (run != null) {
+              run!();
+            } else {
+              print("No  run");
+            }
+          },
+          child: Row(
+
+            children: [
+              Icon(
+                iconName,
+                size: 40,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: Text('${titleName}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    )),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

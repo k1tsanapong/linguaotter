@@ -127,14 +127,14 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () => Navigator.pushNamed(context, '/test-kim') , icon: const Icon(
-
-                          Icons.home_outlined,
-                          size: 50,
-                          color: Colors.white,
-                        )),
+                        // IconButton(
+                        //     padding: EdgeInsets.zero,
+                        //     onPressed: () => Navigator.pushNamed(context, '/test-kim') , icon: const Icon(
+                        //
+                        //   Icons.home_outlined,
+                        //   size: 50,
+                        //   color: Colors.white,
+                        // )),
                         IconButton(
                             padding: EdgeInsets.zero,
                             onPressed: () => Navigator.pushNamed(context, '/score-board') , icon: const Icon(

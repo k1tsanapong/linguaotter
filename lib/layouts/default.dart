@@ -21,11 +21,7 @@ class NormalLayout extends StatelessWidget {
 
     if (head == null) {
 
-      currentHead = [LimitedBox(
-        maxWidth: 0.0,
-        maxHeight: 0.0,
-        child: ConstrainedBox(constraints: const BoxConstraints.expand()),
-      )];
+      currentHead = [Container()];
 
       paddingHeadDefault = 0;
     } else if (paddingHead == null) {
@@ -37,11 +33,7 @@ class NormalLayout extends StatelessWidget {
     } else {between = paddingHead;}
 
     if (body == null) {
-      currentBody = [LimitedBox(
-        maxWidth: 0.0,
-        maxHeight: 0.0,
-        child: ConstrainedBox(constraints: const BoxConstraints.expand()),
-      )];
+      currentBody = [Container()];
     }
 
     return Scaffold(

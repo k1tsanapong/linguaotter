@@ -5,7 +5,11 @@ import '../components/showSnackbar.dart';
 import '../components/theme_app.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+
+  SettingScreen({Key? key}) : super(key: key);
+
+   User user = FirebaseAuth.instance.currentUser!;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +41,42 @@ class SettingScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.manage_accounts,
-                  size: 40,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("Edit profile",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ))
-              ],
+
+            LongMenuButton(
+              iconName: Icons.manage_accounts,
+              titleName: 'Edit profile',
+              run: () =>  Navigator.pushNamed(context, '/edit-profile'),
+
             ),
+
             const SizedBox(
               height: 25,
             ),
-            InkWell(
-              onTap: () {
+
+            LongMenuButton(
+              iconName: Icons.person_remove,
+              titleName: 'Delete Account',
+              run: () {
+                if (user.isAnonymous) {
+                  showSnackBar(context, "Anonymous");
+                }
+
+                else{
+                  showSnackBar(context, "${user.displayName}");
+                }
+
+              },
+
+            ),
+
+            const SizedBox(
+              height: 25,
+            ),
+
+            LongMenuButton(
+              iconName: Icons.exit_to_app,
+              titleName: 'Log out',
+              run: () {
                 try {
                   FirebaseAuth.instance.signOut();
                 } on FirebaseAuthException catch (e) {
@@ -69,32 +86,16 @@ class SettingScreen extends StatelessWidget {
                 // FirebaseAuth.instance.signOut();
                 Navigator.pushNamed(context, '/login');
               },
-              child: Row(
-                children: [
-                  Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationY(math.pi),
-                    child: Icon(
-                      Icons.exit_to_app,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text("Log out",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ))
-                ],
-              ),
             ),
+
+            const SizedBox(
+              height: 25,
+            ),
+
           ]),
         ),
       ),
     );
   }
+
 }
