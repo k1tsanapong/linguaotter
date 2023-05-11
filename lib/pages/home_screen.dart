@@ -8,26 +8,26 @@ import '../components/user_profile.dart';
 import '../providers/china_quest.dart';
 
 class HomeScreen extends StatelessWidget {
-  final user = FirebaseAuth.instance.currentUser!;
+  User user = FirebaseAuth.instance.currentUser!;
 
   disPlayName() {
+
+    int? index = user.email?.indexOf('@');
+
     if (user.isAnonymous == true) {
       return "Guest";
     }
 
-    if ((user.displayName) != "null" || user.displayName != null  ) {
-      print("User : ${user.displayName}");
-      // context.read<FirebaseAuth>().
-      return user.displayName;
+    if (user.displayName == "null" || user.displayName == null  ) {
+      if (index != -1) {
+        return user.email?.substring(0, index);
+      } else {
+        return user.email;
+      }
     }
 
-    int? index = user.email?.indexOf('@');
+    return user.displayName;
 
-    if (index != -1) {
-      return user.email?.substring(0, index);
-    } else {
-      return user.email;
-    }
   }
 
   HomeScreen({super.key});
