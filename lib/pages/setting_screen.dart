@@ -48,8 +48,14 @@ class SettingScreen extends StatelessWidget {
             LongMenuButton(
               iconName: Icons.manage_accounts,
               titleName: 'Edit profile',
-              run: () =>  Navigator.pushNamed(context, '/edit-profile'),
-
+              run: () {
+                if (user.isAnonymous) {
+                  showSnackBar(context, "You are Anonymous");
+                }
+                else {
+                  Navigator.pushNamed(context, '/edit-profile');
+                }
+              }
             ),
 
             const SizedBox(

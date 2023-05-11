@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,10 +17,28 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+
+
+  User user = FirebaseAuth.instance.currentUser!;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
+
+
+  @override
+  void initState() {
+    usernameController = TextEditingController(text: user.displayName);
+    // emailController = TextEditingController(text: user.email);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    String? fullNameInside = user.displayName;
+    // String? emailInside = user.email;
+
     return NormalLayout(
       paddingHead: 60,
       head: [
@@ -43,8 +63,57 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 ProfileRow(
                   titleName: 'Username',
-                  value: 'JohnDoe',
+                  value: '${fullNameInside}',
+                  textController: usernameController,
                 ),
+                const SizedBox(height: 20.0),
+                // ProfileRow(
+                //   titleName: 'Email',
+                //   value: '${emailInside}',
+                //   textController: emailController,
+                // ),
+
+
+                const SizedBox(height: 40.0),
+                BoxButton(textDisplay: 'Update', widthButton: 2.0,
+                  run: ()
+                  async {
+
+                    print("""Testkim : 
+                      
+                      usernameController = ${usernameController.text.trim()}
+                      emailController = ${emailController.text.trim()}
+
+                      
+                      """);
+
+                    await user.updateDisplayName(usernameController.text.trim());
+                    // await user.updateEmail(emailController.text.trim());
+                    await user.reload();
+
+                    await db.collection("users").doc(user.uid).update({
+                      "fullName": usernameController.text.trim(), // Full Name I will edit later
+                      // "email": emailController.text.trim(),
+                    }).then((value) {
+                      print("Update user successful.");
+                      showSnackBar(context, "Update user successful.");
+                      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+                    }).catchError((e) {
+                      print("""Error : 
+                      
+                      usernameController = ${usernameController.text.trim()}
+                      emailController = ${emailController.text.trim()}
+
+                      ${e} 
+                      
+                      """);
+                      showSnackBar(context,
+                          "db error"); // Displaying the usual firebase error message
+                    });
+                    },
+
+                ),
+
               ],
             )),
       ],
@@ -54,12 +123,15 @@ class _EditProfileState extends State<EditProfile> {
 
 class ProfileRow extends StatefulWidget {
   final String titleName;
+  TextEditingController textController;
+
   String value;
 
   ProfileRow({
     Key? key,
     required this.titleName,
     required this.value,
+    required this.textController,
   }) : super(key: key);
 
   @override
@@ -68,82 +140,77 @@ class ProfileRow extends StatefulWidget {
 
 class _ProfileRowState extends State<ProfileRow> {
   bool isEditing = false;
-  late TextEditingController textEditingController;
-
-  @override
-  void initState() {
-    super.initState();
-    textEditingController = TextEditingController(text: widget.value);
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              widget.titleName,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        Text(
+          widget.titleName,
+          style: const TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        const SizedBox(height: 10,),
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (isEditing) ...[
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: ThemeApp.violetTheme,
-                      width: 4.0,
-                    ),
-                  ),
-                  child: TextFormField(
-                    // obscureText: widget.setobscureText ?? false,
-                    controller: textEditingController,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(20),
-                      prefixIcon: Icon(
-                        Icons.cabin_outlined,
-                        color: Colors.black,
+                  flex: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Container(
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: ThemeApp.violetTheme,
+                          width: 4.0,
+                        ),
                       ),
-                      hintText: 'Enter your text',
-                      hintStyle: TextStyle(color: Colors.black45),
+                      child: TextFormField(
+                        // obscureText: setobscureText ?? false,
+                        controller: widget.textController,
+                        style: const TextStyle(color: Colors.black, fontSize: 18.0),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.all(20),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  )),
               IconButton(
                 onPressed: () {
+                  print("After Controller = ${widget.textController.text.trim()}");
+
                   setState(() {
                     isEditing = false;
                     // Save the updated value
-                    widget.value = textEditingController.text;
+                    widget.value = widget.textController.text;
                   });
                 },
                 icon: const Icon(Icons.check),
               ),
             ] else ...[
-              Text(
-                widget.value,
-                style: const TextStyle(fontSize: 18.0),
+              Expanded(
+                flex: 4,
+                child: Container(
+                  margin: const EdgeInsets.only(right: 20,top: 20.0,bottom: 20.0), // Adjust the margin as needed
+                  child: Text(
+                    widget.value,
+                    style: const TextStyle(fontSize: 18.0),
+                  ),
+                ),
               ),
               IconButton(
                 onPressed: () {
+
+                  print("Before Controller = ${widget.textController.text.trim()}");
+
                   setState(() {
                     isEditing = true;
                   });
@@ -152,7 +219,7 @@ class _ProfileRowState extends State<ProfileRow> {
               ),
             ],
           ],
-        )
+        ),
       ],
     );
   }

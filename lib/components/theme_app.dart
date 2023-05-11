@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linguaotter/components/normal_button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:linguaotter/components/showSnackbar.dart';
 
 class ThemeApp {
   static const violetTheme = Color(0xff9747FF);
@@ -96,19 +97,16 @@ class ThemeApp {
 }
 
 class BackToTheFuture extends StatelessWidget {
-
-   final Function()? run;
+  final Function()? run;
 
   const BackToTheFuture({Key? key, this.run}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       alignment: AlignmentDirectional.topStart,
       child: InkWell(
           onTap: () {
-
             if (run != null) {
               run!();
             } else {
@@ -126,16 +124,16 @@ class BackToTheFuture extends StatelessWidget {
 }
 
 class LongMenuButton extends StatelessWidget {
-
   final String titleName;
   final IconData iconName;
   final Function()? run;
 
-  const LongMenuButton({Key? key, required this.titleName, required this.iconName, this.run}) : super(key: key);
+  const LongMenuButton(
+      {Key? key, required this.titleName, required this.iconName, this.run})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         InkWell(
@@ -147,7 +145,6 @@ class LongMenuButton extends StatelessWidget {
             }
           },
           child: Row(
-
             children: [
               Icon(
                 iconName,
@@ -189,7 +186,6 @@ class TextFormBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -228,6 +224,62 @@ class TextFormBox extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class BoxButton extends StatelessWidget {
+  final String textDisplay;
+  final double widthButton;
+  final Function()? run;
+
+  const BoxButton(
+      {Key? key, required this.textDisplay, required this.widthButton, this.run})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    double widthButtonInside = MediaQuery.of(context).size.width / widthButton!;
+
+    return InkWell(
+      onTap: () {
+        if (run != null) {
+          run!();
+        } else {
+          print("No  run");
+        }
+      },
+      child: SizedBox(
+        height: 100,
+        width: widthButtonInside,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: ThemeApp.violetTheme,
+              width: 4.0,
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
+              child: Text(
+                // softWrap: true,
+                textAlign: TextAlign.center,
+                '${textDisplay}',
+                style: GoogleFonts.inter(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
