@@ -17,14 +17,11 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
-
   User user = FirebaseAuth.instance.currentUser!;
   final FirebaseFirestore db = FirebaseFirestore.instance;
-
 
   @override
   void initState() {
@@ -35,7 +32,6 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-
     String? fullNameInside = user.displayName;
     // String? emailInside = user.email;
 
@@ -73,13 +69,22 @@ class _EditProfileState extends State<EditProfile> {
                 //   textController: emailController,
                 // ),
 
-
                 const SizedBox(height: 40.0),
-                BoxButton(textDisplay: 'Update', widthButton: 2.0,
-                  run: ()
-                  async {
-
-                    print("""Testkim : 
+                BoxButton(
+                  textDisplay: 'Update',
+                  widthButton: 2.0,
+                  run: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Update Username'),
+                          content: const Text(
+                              'Are you sure you want to Update your Username?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () async {
+                                print("""Testkim : 
                       
                       usernameController = ${usernameController.text.trim()}
                       emailController = ${emailController.text.trim()}
@@ -87,19 +92,26 @@ class _EditProfileState extends State<EditProfile> {
                       
                       """);
 
-                    await user.updateDisplayName(usernameController.text.trim());
-                    // await user.updateEmail(emailController.text.trim());
-                    await user.reload();
+                                await user.updateDisplayName(
+                                    usernameController.text.trim());
+                                // await user.updateEmail(emailController.text.trim());
+                                await user.reload();
 
-                    await db.collection("users").doc(user.uid).update({
-                      "fullName": usernameController.text.trim(), // Full Name I will edit later
-                      // "email": emailController.text.trim(),
-                    }).then((value) {
-                      print("Update user successful.");
-                      showSnackBar(context, "Update user successful.");
-                      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-                    }).catchError((e) {
-                      print("""Error : 
+                                await db
+                                    .collection("users")
+                                    .doc(user.uid)
+                                    .update({
+                                  "fullName": usernameController.text
+                                      .trim(), // Full Name I will edit later
+                                  // "email": emailController.text.trim(),
+                                }).then((value) {
+                                  print("Update user successful.");
+                                  showSnackBar(
+                                      context, "Update user successful.");
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/', (Route<dynamic> route) => false);
+                                }).catchError((e) {
+                                  print("""Error : 
                       
                       usernameController = ${usernameController.text.trim()}
                       emailController = ${emailController.text.trim()}
@@ -107,13 +119,29 @@ class _EditProfileState extends State<EditProfile> {
                       ${e} 
                       
                       """);
-                      showSnackBar(context,
-                          "db error"); // Displaying the usual firebase error message
-                    });
-                    },
-
+                                  showSnackBar(context,
+                                      "db error"); // Displaying the usual firebase error message
+                                });
+                              },
+                              child: const Text(
+                                'Update',
+                                style: TextStyle(
+                                  // color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
-
               ],
             )),
       ],
@@ -153,7 +181,9 @@ class _ProfileRowState extends State<ProfileRow> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -163,7 +193,6 @@ class _ProfileRowState extends State<ProfileRow> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 15.0),
                     child: Container(
-
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
@@ -175,7 +204,8 @@ class _ProfileRowState extends State<ProfileRow> {
                       child: TextFormField(
                         // obscureText: setobscureText ?? false,
                         controller: widget.textController,
-                        style: const TextStyle(color: Colors.black, fontSize: 18.0),
+                        style: const TextStyle(
+                            color: Colors.black, fontSize: 18.0),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.all(20),
@@ -185,7 +215,8 @@ class _ProfileRowState extends State<ProfileRow> {
                   )),
               IconButton(
                 onPressed: () {
-                  print("After Controller = ${widget.textController.text.trim()}");
+                  print(
+                      "After Controller = ${widget.textController.text.trim()}");
 
                   setState(() {
                     isEditing = false;
@@ -199,7 +230,10 @@ class _ProfileRowState extends State<ProfileRow> {
               Expanded(
                 flex: 4,
                 child: Container(
-                  margin: const EdgeInsets.only(right: 20,top: 20.0,bottom: 20.0), // Adjust the margin as needed
+                  margin: const EdgeInsets.only(
+                      right: 20,
+                      top: 20.0,
+                      bottom: 20.0), // Adjust the margin as needed
                   child: Text(
                     widget.value,
                     style: const TextStyle(fontSize: 18.0),
@@ -208,8 +242,8 @@ class _ProfileRowState extends State<ProfileRow> {
               ),
               IconButton(
                 onPressed: () {
-
-                  print("Before Controller = ${widget.textController.text.trim()}");
+                  print(
+                      "Before Controller = ${widget.textController.text.trim()}");
 
                   setState(() {
                     isEditing = true;
