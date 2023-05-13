@@ -35,46 +35,46 @@ class SelectDifficulty extends StatelessWidget {
         Expanded(child: Container())
       ],
       body:  [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(90.0),
-                  border: Border.all(
-                    color: ThemeApp.violetTheme,
-                    width: 4.0,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width / 1.7,
-                padding: EdgeInsets.all(20.0),
-                height: 175,
-                alignment: AlignmentDirectional.center,
-                child: const Text('Illustration',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    )),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('select difficulty',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ))
-            ],
-          ),
+          // Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Container(
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.circular(90.0),
+          //         border: Border.all(
+          //           color: ThemeApp.violetTheme,
+          //           width: 4.0,
+          //         ),
+          //       ),
+          //       width: MediaQuery.of(context).size.width / 1.7,
+          //       padding: EdgeInsets.all(20.0),
+          //       height: 175,
+          //       alignment: AlignmentDirectional.center,
+          //       child: const Text('Illustration',
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //             fontSize: 16,
+          //           )),
+          //     )
+          //   ],
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
+          // Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: const [
+          //     Text('select difficulty',
+          //         textAlign: TextAlign.center,
+          //         style: TextStyle(
+          //           fontSize: 24,
+          //           fontWeight: FontWeight.w600,
+          //         ))
+          //   ],
+          // ),
           const SizedBox(height: 30),
           Row(
             mainAxisSize: MainAxisSize.max,
