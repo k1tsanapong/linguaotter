@@ -215,13 +215,13 @@ class _ProfileRowState extends State<ProfileRow> {
                   )),
               IconButton(
                 onPressed: () {
-                  print(
-                      "After Controller = ${widget.textController.text.trim()}");
+
 
                   setState(() {
+                    print("After Controller = ${widget.textController.text.trim()}");
                     isEditing = false;
                     // Save the updated value
-                    widget.value = widget.textController.text;
+                    widget.value = widget.textController.text.trim();
                   });
                 },
                 icon: const Icon(Icons.check),
@@ -235,7 +235,7 @@ class _ProfileRowState extends State<ProfileRow> {
                       top: 20.0,
                       bottom: 20.0), // Adjust the margin as needed
                   child: Text(
-                    widget.value,
+                    widget.value.trim(),
                     style: const TextStyle(fontSize: 18.0),
                   ),
                 ),

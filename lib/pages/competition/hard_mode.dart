@@ -167,28 +167,32 @@ class _HardModeState extends State<HardMode> {
         context: context,
         widthButton: 2.2,
         heightButton: 110,
-        textDisplay: '✔️${chiQues[numQues].eng_meaning}',
+        textDisplay: '${chiQues[numQues].eng_meaning}',
+        //✔
         run: () => setState(() => correctClick()));
 
     Widget wrongChoice_1 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 2.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne_1.eng_meaning}',
+        textDisplay: '${wrongOne_1.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     Widget wrongChoice_2 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 2.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne_2.eng_meaning}',
+        textDisplay: '${wrongOne_2.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     Widget wrongChoice_3 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 2.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne_3.eng_meaning}',
+        textDisplay: '${wrongOne_3.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     List<Widget> questions = [

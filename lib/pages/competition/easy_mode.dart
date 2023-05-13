@@ -103,14 +103,16 @@ class _EasyModeState extends State<EasyMode> {
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '✔️${chiQues[numQues].eng_meaning}',
+        textDisplay: '️${chiQues[numQues].eng_meaning}',
+        //✔
         run: () => setState(() => correctClick()));
 
     Widget wrongChoice_1 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne.eng_meaning}',
+        textDisplay: '${wrongOne.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     List<Widget> questions = [

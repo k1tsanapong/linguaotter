@@ -131,21 +131,24 @@ class _MediumModeState extends State<MediumMode> {
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '✔️${chiQues[numQues].eng_meaning}',
+        textDisplay: '${chiQues[numQues].eng_meaning}',
+        //✔
         run: () => setState(() => correctClick()));
 
     Widget wrongChoice_1 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne_1.eng_meaning}',
+        textDisplay: '${wrongOne_1.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     Widget wrongChoice_2 = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne_2.eng_meaning}',
+        textDisplay: '${wrongOne_2.eng_meaning}',
+        //❌
         run: () => setState(() => wrongCLick()));
 
     List<Widget> questions = [
