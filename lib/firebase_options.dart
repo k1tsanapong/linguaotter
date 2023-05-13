@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '470678956300',
     projectId: 'linguaotter',
     authDomain: 'linguaotter.firebaseapp.com',
+    databaseURL: 'https://linguaotter-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'linguaotter.appspot.com',
     measurementId: 'G-DB3878991C',
   );
@@ -64,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:470678956300:android:93d6024bffd0645914c129',
     messagingSenderId: '470678956300',
     projectId: 'linguaotter',
+    databaseURL: 'https://linguaotter-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'linguaotter.appspot.com',
   );
 }

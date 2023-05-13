@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "470678956300",
+    "firebase_url": "https://linguaotter-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "linguaotter",
     "storage_bucket": "linguaotter.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "470678956300-tm8ldno30fu5fk36lu47h3bhjh0e52q1.apps.googleusercontent.com",
+          "client_id": "470678956300-t7t4qsqn7vjvpt24c7p2qmkd27e68nfq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.linguaotter.cards",
-            "certificate_hash": "2bf15af0b011b3c78265a01d25c93288d5b332c2"
+            "certificate_hash": "f94045a143c18e7163106bccf2d16df5951dc2ed"
           }
         },
         {
