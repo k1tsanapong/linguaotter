@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+## Deploy
+https://play.google.com/store/apps/details?id=com.linguaotter.cards
+
+## Detail
+https://seki-code.notion.site/Mini-Project-2-410ef3d23fb04b81893e76b478ef1806
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
